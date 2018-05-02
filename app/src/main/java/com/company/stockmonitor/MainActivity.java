@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+//Simeon
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
             }
             return false;
+
         }
     };
 

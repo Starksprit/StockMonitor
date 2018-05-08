@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> stockslist = new ArrayList<>();
 
     ListView listView;
+
+
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -53,6 +56,15 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         listView = (ListView) findViewById(R.id.stocksListView);
+
+        DBhandler dbhandler = new DBhandler(this,null,null,1);
+
+        dbhandler.clearDB();
+
+        new BackgroundHandler().execute();
+        
+
+        //dbhandler.addStock("foretasssget blah", "fasdtb");
 
         loadList();
 

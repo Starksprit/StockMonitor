@@ -1,5 +1,7 @@
 package com.company.stockmonitor;
 
+import android.os.AsyncTask;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -88,6 +90,7 @@ public class Apihandler {
 
         return stockNames;
     }
+
 }
 
 

@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     Editor edit;
     ListView listView;
     SearchView searchView;
+
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -90,6 +93,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        DBhandler dbhandler = new DBhandler(this,null,null,1);
+
+        dbhandler.clearDB();
+
+        new BackgroundHandler().execute();
+        
+
+        //dbhandler.addStock("foretasssget blah", "fasdtb");
 
         loadList();
 

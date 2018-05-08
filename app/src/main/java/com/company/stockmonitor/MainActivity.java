@@ -1,5 +1,9 @@
 package com.company.stockmonitor;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -9,15 +13,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<String> stockslist = new ArrayList<>();
-
+    SharedPreferences sharedPref;
+    Editor edit;
     ListView listView;
-
+    SearchView searchView;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -33,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_search:
                     //when search button is pressed
+                    Intent intent = new Intent(MainActivity.this, SearchActivity.class );
+                    startActivity(intent);
 
                     return true;
                 case R.id.navigation_RSS:
@@ -50,9 +58,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        sharedPref = getSharedPreferences("stockmonitor", Context.MODE_PRIVATE);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
         listView = (ListView) findViewById(R.id.stocksListView);
+        searchView = (SearchView) findViewById(R.id.seachViewBar);
+
+        searchView.setOnQueryTextListener(
+                new SearchView.OnQueryTextListener() {
+
+                    @Override
+                    public boolean onQueryTextChange(String s) {
+
+                        //Apply search filtering here
+                        return false;
+
+                    }
+                    @Override
+                    public boolean onQueryTextSubmit(String s) {
+
+                        edit = sharedPref.edit();
+                        edit.putString("searchedItem", searchView.getQuery().toString() );
+                        edit.commit();
+
+                        Intent intent = new Intent(MainActivity.this, SearchActivity.class );
+                        startActivity(intent);
+
+                        return false;
+
+                    }
+                }
+        );
 
         loadList();
 

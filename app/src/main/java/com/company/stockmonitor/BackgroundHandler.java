@@ -13,11 +13,11 @@ public class BackgroundHandler extends AsyncTask<Void,Void,Void> {
         ArrayList<String> companyNames = new ArrayList<String>();
         ArrayList<String> symbols = new ArrayList<String>();
 
-        Apihandler apihandler = new Apihandler();
+        APIHandler apiHandler = new APIHandler();
 
         try {
-            companyNames = apihandler.getStockNames();
-            symbols = apihandler.getStockSymbols();
+            companyNames = apiHandler.getStockNames();
+            symbols = apiHandler.getStockSymbols();
         } catch (IOException e) {
             e.printStackTrace();
         }

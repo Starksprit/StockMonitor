@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
     Editor edit;
     ListView listView;
     SearchView searchView;
-
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -66,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         listView = (ListView) findViewById(R.id.stocksListView);
-        searchView = (SearchView) findViewById(R.id.seachViewBar);
+        searchView = (SearchView) findViewById(R.id.searchViewBar);
 
         searchView.setOnQueryTextListener(
                 new SearchView.OnQueryTextListener() {
@@ -94,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        DBhandler dbhandler = new DBhandler(this,null,null,1);
+        DBHandler dbhandler = new DBHandler(this,null,null,1);
 
         dbhandler.clearDB();
 

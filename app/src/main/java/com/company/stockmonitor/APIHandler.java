@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Apihandler {
+public class APIHandler {
 
     //search url: https://api.iextrading.com/1.0/ref-data/symbols
 

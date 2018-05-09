@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_RSS:
                     //when RSS button is pressed
+                    Intent intent = new Intent(MainActivity.this, Rssfeed.class );
+                    startActivity(intent);
 
                     return true;
             }

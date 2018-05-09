@@ -25,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     SearchView searchView;
 
+    public SharedPreferences getSharedPref() {
+        return sharedPref;
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_search:
                     //when search button is pressed
-                    
+
 
                     return true;
                 case R.id.navigation_RSS:
@@ -95,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
         dbhandler.clearDB();
 
         new BackgroundHandler().execute();
-        
 
         //dbhandler.addStock("foretasssget blah", "fasdtb");
 

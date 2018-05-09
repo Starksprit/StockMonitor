@@ -25,7 +25,4 @@ public class SPHandler {
     public SharedPreferences getSharedPref() {
         return sharedPref;
     }
-
-
-
 }

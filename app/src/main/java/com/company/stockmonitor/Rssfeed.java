@@ -20,9 +20,7 @@ public class Rssfeed extends AppCompatActivity {
         vpPager= findViewById(R.id.viewPage_for_fragment);
         myAdapter = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(myAdapter);
-
     }
-
 
     class MyPagerAdapter extends FragmentPagerAdapter {
 
@@ -36,7 +34,6 @@ public class Rssfeed extends AppCompatActivity {
                     return new RssfeedFragment();
                 case 1:
                     return new RssfeedFragment();
-                    
                 default:
                     return new RssfeedFragment();
             }

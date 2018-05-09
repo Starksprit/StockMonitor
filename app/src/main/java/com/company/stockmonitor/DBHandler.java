@@ -14,9 +14,6 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_NAME = "names";
     private static final String COLUMN_SYMBOL = "symbol";
 
-
-
-
     public DBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABSE_NAME, factory, DATABASE_VERSION);
     }
@@ -29,7 +26,6 @@ public class DBHandler extends SQLiteOpenHelper {
                 ");";
 
         db.execSQL(query);
-
     }
 
     public void addStock(String stockName, String symbol) {
@@ -43,12 +39,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void clearDB() {
         SQLiteDatabase db = getWritableDatabase();
-
         db.execSQL("DELETE FROM " + TABLE_NAME);
     }
-
-
-
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {

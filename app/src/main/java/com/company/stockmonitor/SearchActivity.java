@@ -34,7 +34,6 @@ public class SearchActivity extends AppCompatActivity {
 
         loadList();
         listClickListener();
-
     }
 
     public void loadList() {
@@ -72,7 +71,6 @@ public class SearchActivity extends AppCompatActivity {
         String json = sharedPref.getString(key, null);
         Type type = new TypeToken<ArrayList<String>>() {}.getType();
         return gson.fromJson(json, type);
-
     }
 
     public void listClickListener() {
@@ -83,18 +81,14 @@ public class SearchActivity extends AppCompatActivity {
 
                 if (i == 0) {
                     System.out.println("First item");
-
                 }
                 else if (i == 1) {
                     System.out.println("Second item");
-
                 }
                 else if (i == 2) {
                     System.out.println("Third Item");
-
                 }
             }
         });
-
     }
 }

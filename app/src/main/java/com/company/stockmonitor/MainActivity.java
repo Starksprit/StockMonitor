@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private Editor edit;
     ListView listView;
     SearchView searchView;
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -40,18 +38,18 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_search:
                     //when search button is pressed
-
+                    Intent intent = new Intent(MainActivity.this, AboutActivity.class );
+                    startActivity(intent);
 
                     return true;
                 case R.id.navigation_RSS:
                     //when RSS button is pressed
-                    Intent intent = new Intent(MainActivity.this, Rssfeed.class );
-                    startActivity(intent);
+                    Intent intent2 = new Intent(MainActivity.this, Rssfeed.class );
+                    startActivity(intent2);
 
                     return true;
             }
             return false;
-
         }
     };
 
@@ -96,15 +94,11 @@ public class MainActivity extends AppCompatActivity {
         );
 
         DBHandler dbhandler = new DBHandler(this,null,null,1);
-
         dbhandler.clearDB();
-
         new BackgroundHandler().execute();
 
         //dbhandler.addStock("foretasssget blah", "fasdtb");
-
         loadList();
-
         listClickListener();
     }
 
@@ -129,20 +123,14 @@ public class MainActivity extends AppCompatActivity {
 
                 if (i == 0) {
                     System.out.println("Fisk");
-
                 }
                 else if (i == 1) {
                     System.out.println("KAtt");
-
                 }
                 else if (i == 2) {
                     System.out.println("räkor");
-
                 }
             }
         });
-
     }
-
-
 }

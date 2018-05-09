@@ -1,7 +1,5 @@
 package com.company.stockmonitor;
 
-import android.os.AsyncTask;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,12 +11,9 @@ import java.util.regex.Pattern;
 
 public class APIHandler {
 
-    //search url: https://api.iextrading.com/1.0/ref-data/symbols
-
     public ArrayList<Float> getStockDailyValue(String stock) throws IOException {
 
         ArrayList<Float> listOfValue = new ArrayList<Float>();
-
         URL url = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + stock + "&interval=1min&apikey=KZDG4W2GA1YFWBIN");
         URLConnection urlcon = url.openConnection();
         InputStreamReader ins = new InputStreamReader(urlcon.getInputStream());
@@ -47,50 +42,44 @@ public class APIHandler {
             }
             line = bf.readLine();
         }
-
         return listOfValue;
     }
 
     public ArrayList<String> getStockNames() throws IOException {
+
         ArrayList<String> stockNames = new ArrayList<String>();
-
-
         URL url = new URL("https://api.iextrading.com/1.0/ref-data/symbols");
         URLConnection urlcon = url.openConnection();
         InputStreamReader ins = new InputStreamReader(urlcon.getInputStream());
         BufferedReader bf = new BufferedReader(ins);
-
         String line = bf.readLine();
 
         Pattern pattern = Pattern.compile("\"name\":\"(.*?)\",");
         Matcher matcher = pattern.matcher(line);
+
         while (matcher.find()) {
             stockNames.add(matcher.group(1));
         }
-
         return stockNames;
     }
 
     public ArrayList<String> getStockSymbols() throws IOException {
+
         ArrayList<String> stockNames = new ArrayList<String>();
-
-
         URL url = new URL("https://api.iextrading.com/1.0/ref-data/symbols");
         URLConnection urlcon = url.openConnection();
         InputStreamReader ins = new InputStreamReader(urlcon.getInputStream());
         BufferedReader bf = new BufferedReader(ins);
-
         String line = bf.readLine();
 
         Pattern pattern = Pattern.compile("symbol\":\"(.*?)\",\"");
         Matcher matcher = pattern.matcher(line);
+
         while (matcher.find()) {
             stockNames.add(matcher.group(1));
         }
-
         return stockNames;
     }
-
 }
 
 

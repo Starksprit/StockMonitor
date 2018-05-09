@@ -12,30 +12,24 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-
 public class RssfeedFragment extends Fragment {
-
 
     ListView lvRss;
     ArrayList<String> titles;
     ArrayList<String> links;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.rssfeed_layout, container, false);
-
         lvRss = (ListView) view.findViewById(R.id.listViewRss);
         titles = new ArrayList<>();
         links = new ArrayList<>();
@@ -51,7 +45,6 @@ public class RssfeedFragment extends Fragment {
         });
 
         new processInBg().execute();
-
         return view;
     }
 
@@ -70,24 +63,18 @@ public class RssfeedFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
         }
 
         @Override
         protected Exception doInBackground(Integer... integers) {
             try {
                 URL url = new URL("https://news.google.com/news/rss/?ned=us&gl=US&hl=en");
-
                 XmlPullParserFactory xppf = XmlPullParserFactory.newInstance();
-
                 xppf.setNamespaceAware(false);
-
                 XmlPullParser xpp = xppf.newPullParser();
-
                 xpp.setInput(getInputstream(url),"UTF_8");
 
                 boolean insideItem = false;
-
                 int eventType = xpp.getEventType();
 
                 while (eventType != XmlPullParser.END_DOCUMENT) {
@@ -111,7 +98,6 @@ public class RssfeedFragment extends Fragment {
                     }
 
                     eventType = xpp.next();
-
                 }
             }
             catch (MalformedURLException e) {
@@ -123,8 +109,6 @@ public class RssfeedFragment extends Fragment {
             catch (IOException e) {
                 exception = e;
             }
-
-
             return exception;
         }
 
@@ -132,9 +116,7 @@ public class RssfeedFragment extends Fragment {
         protected void onPostExecute(Exception s) {
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(getView().getContext(), android.R.layout.simple_list_item_1, titles);
-
             lvRss.setAdapter(adapter);
-
             super.onPostExecute(s);
         }
     }

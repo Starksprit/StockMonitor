@@ -1,5 +1,8 @@
 package com.company.stockmonitor;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +14,8 @@ import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
 
+    SharedPreferences sharedPref;
+    Editor edit;
     ListView listView;
 
     @Override
@@ -18,6 +23,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        sharedPref = getSharedPreferences("stockmonitor", Context.MODE_PRIVATE);
         listView = (ListView) findViewById(R.id.resultListView);
 
         loadList();
@@ -27,7 +33,7 @@ public class SearchActivity extends AppCompatActivity {
     public void loadList() {
 
         ArrayList<String> stockslist = new ArrayList<>(); //<---
-        stockslist.add("Ett");
+        stockslist.add(sharedPref.getString("searchedItem", "Not available"));
         stockslist.add("Två");
         stockslist.add("Tre");
 

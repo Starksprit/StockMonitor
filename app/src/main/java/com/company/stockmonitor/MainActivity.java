@@ -39,8 +39,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_search:
                     //when search button is pressed
-                    Intent intent = new Intent(MainActivity.this, SearchActivity.class );
-                    startActivity(intent);
+                    
 
                     return true;
                 case R.id.navigation_RSS:

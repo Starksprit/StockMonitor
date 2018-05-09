@@ -20,14 +20,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<String> stockslist = new ArrayList<>();
-    SharedPreferences sharedPref;
-    Editor edit;
+    private SharedPreferences sharedPref;
+    private Editor edit;
     ListView listView;
     SearchView searchView;
 
-    public SharedPreferences getSharedPref() {
-        return sharedPref;
-    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_search:
                     //when search button is pressed
+
 
                     return true;
                 case R.id.navigation_RSS:
@@ -65,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences("stockmonitor", Context.MODE_PRIVATE);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        SPHandler.getInstance().setSharedPref(sharedPref);
 
         listView = (ListView) findViewById(R.id.stocksListView);
         searchView = (SearchView) findViewById(R.id.searchViewBar);

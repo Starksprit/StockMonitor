@@ -1,5 +1,6 @@
 package com.company.stockmonitor;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -15,9 +16,8 @@ import java.util.ArrayList;
 public class BackgroundHandler extends AsyncTask<Void,Void,Void> {
 
 
-
-    SharedPreferences sharedPref;
-    Editor editor;
+    private SharedPreferences sharedPref;
+    private Editor editor;
 
 
     @Override
@@ -26,6 +26,7 @@ public class BackgroundHandler extends AsyncTask<Void,Void,Void> {
         ArrayList<String> symbols = new ArrayList<String>();
 
         APIHandler apiHandler = new APIHandler();
+        sharedPref = SPHandler.getInstance().getSharedPref();
 
         try {
             companyNames = apiHandler.getStockNames();
@@ -34,29 +35,19 @@ public class BackgroundHandler extends AsyncTask<Void,Void,Void> {
             e.printStackTrace();
         }
 
-        //saveArrayList(companyNames,"companyNames");
-        //saveArrayList(symbols,"symbols");
+        saveArrayList(companyNames,"companyNames");
+        saveArrayList(symbols,"symbols");
 
         return null;
     }
 
     public void saveArrayList(ArrayList<String> list, String key){
-        //sharedpref
 
         Gson gson = new Gson();
         String json = gson.toJson(list);
+
+        editor = sharedPref.edit();
         editor.putString(key, json);
-        editor.apply();     // This line is IMPORTANT !!!
+        editor.commit();
     }
-
-    /*
-    public ArrayList<String> getArrayList(String key){
-        //sharedpref
-
-        Gson gson = new Gson();
-        String json = prefs.getString(key, null);
-        Type type = new TypeToken<ArrayList<String>>() {}.getType();
-        return gson.fromJson(json, type);
-    }
-*/
 }

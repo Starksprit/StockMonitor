@@ -1,6 +1,5 @@
 package com.company.stockmonitor;
 
-
 import android.content.SharedPreferences;
 
 public class SPHandler {

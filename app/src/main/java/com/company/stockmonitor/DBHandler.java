@@ -2,20 +2,25 @@ package com.company.stockmonitor;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABSE_NAME = "STOCKS.db";
+    private static final String DATABASE_NAME = "STOCKS.db";
     private static final String TABLE_NAME = "stocks";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NAME = "names";
     private static final String COLUMN_SYMBOL = "symbol";
+    private final SQLiteDatabase db = getWritableDatabase();
 
-    public DBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABSE_NAME, factory, DATABASE_VERSION);
+    public DBHandler(Context context, SQLiteDatabase.CursorFactory factory) {
+        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
     @Override
@@ -34,12 +39,30 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_SYMBOL,symbol);
 
         SQLiteDatabase db = getWritableDatabase();
-        db.insert(TABLE_NAME,null,values);
+        db.insert(TABLE_NAME, null, values); // TODO fix error message when duplicate found!
+
     }
 
-    public void clearDB() {
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_NAME);
+    public void removeStock(String stock) {
+
+        db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_NAME + "='" + stock + "'");
+    }
+
+    public ArrayList<String> getStocks() {
+
+        ArrayList<String> list = new ArrayList<>();
+        String query = "SELECT * from " + TABLE_NAME;
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        while (cursor.moveToNext()) {
+
+            list.add(cursor.getString(0));
+            list.add(cursor.getString(1));
+
+        }
+
+        return list;
     }
 
     @Override

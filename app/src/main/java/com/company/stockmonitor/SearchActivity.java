@@ -1,7 +1,9 @@
 package com.company.stockmonitor;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -15,9 +17,12 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import android.content.SharedPreferences.Editor;
+
 public class SearchActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPref;
+    private Editor edit;
     private ListView listView;
     private ArrayList<String> companyNames = new ArrayList<>();
     private ArrayList<String> symbols = new ArrayList<>();
@@ -59,9 +64,17 @@ public class SearchActivity extends AppCompatActivity {
 
         } else {
 
-            Toast toast = Toast.makeText(this,"No result, try again.", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, "No result, try again.", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.TOP,0, 20);
             toast.show();
+
+            final Handler priceHandler = new Handler();
+            priceHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+                }
+            }, 2000);
         }
     }
 
@@ -79,15 +92,13 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if (i == 0) {
-                    System.out.println("First item");
-                }
-                else if (i == 1) {
-                    System.out.println("Second item");
-                }
-                else if (i == 2) {
-                    System.out.println("Third Item");
-                }
+                edit = sharedPref.edit();
+                edit.putString("selectedCompanyName", companyNamesSearchResult.get(i));
+                edit.putString("selectedSymbol", symbolsSearchResult.get(i));
+                edit.commit();
+
+                Intent intent = new Intent(SearchActivity.this, StockInfo.class);
+                startActivity(intent);
             }
         });
     }

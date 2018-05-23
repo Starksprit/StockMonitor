@@ -7,13 +7,14 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class BackgroundHandler extends AsyncTask<Void,Void,Void> {
+public class BackgroundInitializer extends AsyncTask<Void, Void, Void> {
 
     private SharedPreferences sharedPref;
     private Editor editor;
 
     @Override
     protected Void doInBackground(Void... voids) {
+
         ArrayList<String> companyNames = new ArrayList<String>();
         ArrayList<String> symbols = new ArrayList<String>();
 

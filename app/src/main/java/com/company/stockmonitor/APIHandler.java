@@ -11,36 +11,45 @@ import java.util.regex.Pattern;
 
 public class APIHandler {
 
-    public ArrayList<Float> getStockDailyValue(String stock) throws IOException {
+    public ArrayList<Float> getStockDailyValue(String stock) {
 
-        ArrayList<Float> listOfValue = new ArrayList<Float>();
-        URL url = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + stock + "&interval=1min&apikey=KZDG4W2GA1YFWBIN");
-        URLConnection urlcon = url.openConnection();
-        InputStreamReader ins = new InputStreamReader(urlcon.getInputStream());
-        BufferedReader bf = new BufferedReader(ins);
-
-        String line = bf.readLine();
+        String line = null;
         String getValueAsString;
         float valueAsFloat;
+        BufferedReader bf = null;
 
-        //while there is something to read
-        while (line != null) {
-            //just printing for editing purpose will be deleted later TODO
-            //System.out.println(line);
+        ArrayList<Float> listOfValue = new ArrayList<Float>();
+        try {
+            URL url = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + stock + "&interval=1min&apikey=KZDG4W2GA1YFWBIN");
+            URLConnection urlcon = url.openConnection();
+            InputStreamReader ins = new InputStreamReader(urlcon.getInputStream());
+            bf = new BufferedReader(ins);
 
-            //here is where we pick something out from the current line
-            if (line.contains("close\": ")) {
-                getValueAsString = line;
-                //extract the number from the line
-                getValueAsString = getValueAsString.replaceAll("[^\\.0123456789]", "");
-                //convert it to just the value
-                getValueAsString = getValueAsString.substring(2);
-                //from string to float
-                valueAsFloat = Float.valueOf(getValueAsString);
-                //add to list
-                listOfValue.add(valueAsFloat);
-            }
             line = bf.readLine();
+
+            //while there is something to read
+            while (line != null) {
+                //just printing for editing purpose will be deleted later TODO
+                //System.out.println(line);
+
+                //here is where we pick something out from the current line
+                if (line.contains("close\": ")) {
+                    getValueAsString = line;
+                    //extract the number from the line
+                    getValueAsString = getValueAsString.replaceAll("[^\\.0123456789]", "");
+                    //convert it to just the value
+                    getValueAsString = getValueAsString.substring(2);
+
+                    //from string to float
+                    valueAsFloat = Float.valueOf(getValueAsString);
+                    //add to list
+                    listOfValue.add(valueAsFloat);
+
+                }
+                line = bf.readLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return listOfValue;
     }

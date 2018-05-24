@@ -2,6 +2,7 @@ package com.company.stockmonitor;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -28,6 +37,7 @@ public class StockInfo extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private ArrayList<Float> prices;
     private DBHandler dbHandler;
+    private LineChart lineChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +50,9 @@ public class StockInfo extends AppCompatActivity {
         removeStock = (Button) findViewById(R.id.removeStock);
         sharedPref = getSharedPreferences("stockmonitor", Context.MODE_PRIVATE);
         dbHandler = new DBHandler(StockInfo.this, null);
-
+        lineChart = findViewById(R.id.graph);
+        lineChart.setNoDataText("Loading graph...");
+        lineChart.setNoDataTextColor(Color.WHITE);
         loadInfo();
 
     }
@@ -60,6 +72,7 @@ public class StockInfo extends AppCompatActivity {
                 prices = getArrayList();
                 stockPrice.setText(String.valueOf(prices.get(0)));
                 // Rita ut grafen här TODO
+                updateGraph();
             }
         }, 4000);
 
@@ -90,6 +103,87 @@ public class StockInfo extends AppCompatActivity {
         dbHandler.removeStock(sharedPref.getString("selectedCompanyName", "Not found"));
         finish();
 
+    }
+
+    public void drawGraph() {
+        ArrayList<Entry> data = new ArrayList<>();
+        for (int i = 1; i < 30; i++) {
+            data.add(new Entry(i, i));
+        }
+
+        LineDataSet dataset = new LineDataSet(data, "Label");
+        dataset.setColor(Color.BLUE);
+        dataset.setDrawFilled(true);
+        dataset.setLineWidth(1);
+        dataset.setDrawCircles(false);
+        dataset.setDrawValues(false);
+
+        LineData dataforchart = new LineData(dataset);
+        lineChart.setData(dataforchart);
+
+        Description description = new Description();
+        description.setText("This is a graph");
+        lineChart.setDescription(description);
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        lineChart.getAxisRight().setEnabled(false);
+
+    }
+
+    public void updateGraph() {
+        int counter = 90;
+        ArrayList<Entry> data = new ArrayList<>();
+        for (int i = 0; i < 90; i++) {
+            data.add(new Entry(i, prices.get(counter)));
+            counter--;
+        }
+
+        LineDataSet dataset = new LineDataSet(data, "Price");
+        dataset.setColor(Color.CYAN);
+        dataset.setDrawFilled(true);
+        dataset.setLineWidth(1);
+        dataset.setDrawCircles(false);
+        dataset.setDrawValues(false);
+
+        LineData dataforchart = new LineData(dataset);
+        lineChart.setData(dataforchart);
+
+        Description description = new Description();
+        description.setText("Days");
+        description.setTextColor(Color.WHITE);
+        lineChart.setDescription(description);
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        lineChart.getAxisLeft().setEnabled(false);
+        lineChart.getAxisRight().setTextColor(Color.WHITE);
+        lineChart.getXAxis().setTextColor(Color.WHITE);
+        lineChart.getLegend().setTextColor(Color.WHITE);
+        /*
+        lineChart.getXAxis().setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+
+                return getDates().get((int) value);
+            }
+        });
+        */
+        // TODO fix xaxis so its in correct order
+        lineChart.notifyDataSetChanged();
+        lineChart.invalidate();
+    }
+
+    public ArrayList<String> getDates() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("80");
+        list.add("70");
+        list.add("60");
+        list.add("50");
+        list.add("40");
+        list.add("30");
+        list.add("20");
+        list.add("10");
+        list.add("0");
+        return list;
     }
 
 

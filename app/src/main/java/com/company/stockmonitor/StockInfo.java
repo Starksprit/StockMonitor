@@ -105,10 +105,9 @@ public class StockInfo extends AppCompatActivity {
     }
 
     public void updateGraph() {
-        // todo Fix stocks where array out of bounds
-        int counter = 90;
+        int counter = prices.size() - 1;
         ArrayList<Entry> data = new ArrayList<>();
-        for (int i = 0; i < 90; i++) {
+        for (int i = 0; i < prices.size(); i++) {
             data.add(new Entry(i, prices.get(counter)));
             counter--;
         }

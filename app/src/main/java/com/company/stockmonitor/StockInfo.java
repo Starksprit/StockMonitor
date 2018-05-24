@@ -104,31 +104,6 @@ public class StockInfo extends AppCompatActivity {
 
     }
 
-    public void drawGraph() {
-        ArrayList<Entry> data = new ArrayList<>();
-        for (int i = 1; i < 30; i++) {
-            data.add(new Entry(i, i));
-        }
-
-        LineDataSet dataset = new LineDataSet(data, "Label");
-        dataset.setColor(Color.BLUE);
-        dataset.setDrawFilled(true);
-        dataset.setLineWidth(1);
-        dataset.setDrawCircles(false);
-        dataset.setDrawValues(false);
-
-        LineData dataforchart = new LineData(dataset);
-        lineChart.setData(dataforchart);
-
-        Description description = new Description();
-        description.setText("This is a graph");
-        lineChart.setDescription(description);
-        XAxis xAxis = lineChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        lineChart.getAxisRight().setEnabled(false);
-
-    }
-
     public void updateGraph() {
         // todo Fix stocks where array out of bounds
         int counter = 90;

@@ -10,10 +10,10 @@
         android:id="@+id/ImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/aboutbackground"
-        android:contentDescription="@drawable/stock_logo_final"
+        android:background="@drawable/background"
+        android:contentDescription="@drawable/stock_logo_fa"
         android:scaleType="fitCenter"
-        android:src="@drawable/stock_logo_final" />
+        android:src="@drawable/stock_logo_fa" />
 
 
 </android.support.constraint.ConstraintLayout>

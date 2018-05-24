@@ -21,7 +21,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class RssfeedFragment extends Fragment {
+public class SecondRssFeedFragment extends Fragment {
 
     ListView lvRss;
     ArrayList<String> titles;
@@ -68,7 +68,7 @@ public class RssfeedFragment extends Fragment {
         @Override
         protected Exception doInBackground(Integer... integers) {
             try {
-                URL url = new URL("http://seekingalpha.com/feed.xml");
+                URL url = new URL("http://articlefeeds.nasdaq.com/nasdaq/symbols?symbol=SYBT");
                 XmlPullParserFactory xppf = XmlPullParserFactory.newInstance();
                 xppf.setNamespaceAware(false);
                 XmlPullParser xpp = xppf.newPullParser();

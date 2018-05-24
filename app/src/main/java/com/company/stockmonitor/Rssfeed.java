@@ -33,7 +33,9 @@ public class Rssfeed extends AppCompatActivity {
                 case 0:
                     return new RssfeedFragment();
                 case 1:
-                    return new RssfeedFragment();
+                    return new SecondRssFeedFragment();
+                case 2:
+                    return new ThirdRssFeedFragment();
                 default:
                     return new RssfeedFragment();
             }
@@ -41,7 +43,7 @@ public class Rssfeed extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     }
 }

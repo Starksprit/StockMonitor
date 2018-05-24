@@ -71,7 +71,6 @@ public class StockInfo extends AppCompatActivity {
             public void run() {
                 prices = getArrayList();
                 stockPrice.setText(String.valueOf(prices.get(0)));
-                // Rita ut grafen här TODO
                 updateGraph();
             }
         }, 4000);
@@ -131,6 +130,7 @@ public class StockInfo extends AppCompatActivity {
     }
 
     public void updateGraph() {
+        // todo Fix stocks where array out of bounds
         int counter = 90;
         ArrayList<Entry> data = new ArrayList<>();
         for (int i = 0; i < 90; i++) {

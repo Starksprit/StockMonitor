@@ -29,8 +29,6 @@ public class APIHandler {
 
             //while there is something to read
             while (line != null) {
-                //just printing for editing purpose will be deleted later TODO
-                //System.out.println(line);
 
                 //here is where we pick something out from the current line
                 if (line.contains("close\": ")) {

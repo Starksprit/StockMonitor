@@ -3,14 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4286f4"
+    android:background="#303030"
     >
 
 
     <ListView
         android:id="@+id/listViewRss"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="#303030" />
 
 
 </LinearLayout>

@@ -9,8 +9,8 @@ import android.os.Bundle;
 
 public class Rssfeed extends AppCompatActivity {
 
-    MyPagerAdapter myAdapter;
-    ViewPager vpPager;
+    private MyPagerAdapter myAdapter;
+    private ViewPager vpPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

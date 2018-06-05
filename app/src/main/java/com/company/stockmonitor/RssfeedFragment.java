@@ -23,9 +23,9 @@ import java.util.ArrayList;
 
 public class RssfeedFragment extends Fragment {
 
-    ListView lvRss;
-    ArrayList<String> titles;
-    ArrayList<String> links;
+    private ListView lvRss;
+    private ArrayList<String> titles;
+    private ArrayList<String> links;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

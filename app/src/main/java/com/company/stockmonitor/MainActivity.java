@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_stocks:
                     //when stocks button is pressed
 
-
                     return true;
                 case R.id.navigation_search:
                     //when search button is pressed

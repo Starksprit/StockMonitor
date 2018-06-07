@@ -6,13 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".AboutActivity">
 
+    
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="585dp"
         android:background="?android:attr/windowBackground"
-        android:text="This page will tell you more about the app!"
+        android:text="Welcome to Stock Monitor! \n\n
+
+To find interesting companies to follow, click on the magnifying glass to use the search function.\n\n
+
+If you want to add a stock to your selected list, click on the stock and then on the + next to the graph.\n\n
+
+To remove a stock from your selected list, click on the stock and then on the - next to the graph.\n\n
+
+To find stock related news that will help you decide what stocks to follow, please visit the 'News' page.\n\n
+
+Enjoy!"
         android:textAlignment="center"
-        android:textColor="@android:color/holo_green_light"
-        android:textSize="30sp" />
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
 </android.support.constraint.ConstraintLayout>
